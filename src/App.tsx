@@ -1,25 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import { CssBaseline } from "@mui/material";
+import { ThemeProvider } from "./theme/ThemeContext";
+import Layout from "./components/Layout";
+import Dashboard from "./pages/Dashboard";
+import Courses from "./pages/Courses";
+import CourseDetails from "./pages/CourseDetails";
+import Assignments from "./pages/Assignments";
+import Grades from "./pages/Grades";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider>
+      <CssBaseline />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Dashboard />} />
+            <Route path="courses" element={<Courses />} />
+            <Route path="courses/:id" element={<CourseDetails />} />
+            <Route path="assignments" element={<Assignments />} />
+            <Route path="grades" element={<Grades />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 
